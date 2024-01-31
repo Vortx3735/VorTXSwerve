@@ -7,9 +7,25 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 
+import java.io.File;
+import edu.wpi.first.wpilibj.Filesystem;
+import swervelib.parser.SwerveParser;
+import swervelib.SwerveDrive;
+import edu.wpi.first.math.util.Units;
+
+
+
+
 public class RobotContainer {
   public RobotContainer() {
     configureBindings();
+    createSwerve();
+  }
+
+  public void createSwerve() {
+    double maximumSpeed = Units.feetToMeters(4.5);
+    File swerveJsonDirectory = new File(Filesystem.getDeployDirectory(),"swerve");
+    SwerveDrive swerveDrive = new SwerveParser(swerveJsonDirectory).createSwerveDrive(maximumSpeed);
   }
 
   private void configureBindings() {
